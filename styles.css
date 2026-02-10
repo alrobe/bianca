@@ -1,0 +1,449 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #a8d5e2 0%, #b8e5f0 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    padding: 100px 20px 40px 20px;
+    min-height: 100vh;
+}
+
+.envelope-wrapper {
+    position: relative;
+    width: 500px;
+    height: 350px;
+    perspective: 1000px;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.envelope-body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #2c5f8d;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #1a4a6b;
+    border-radius: 8px 8px 0 0;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 3;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.envelope-flap.open {
+    transform: rotateX(-180deg);
+}
+
+.lock-heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    background: #e74c3c;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    z-index: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    pointer-events: none;
+}
+
+/* Lóbulo izquierdo */
+.lock-heart::before,
+.lock-heart::after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: #e74c3c;
+    border-radius: 50%;
+}
+
+/* Izquierdo */
+.lock-heart::before {
+    top: -35px;
+    left: 0;
+}
+
+/* Derecho */
+.lock-heart::after {
+    left: 35px;
+    top: 0;
+}
+
+.envelope-flap.open ~ .lock-heart {
+    opacity: 0;
+    transform: translate(-50%, 100%) rotate(-45deg) scale(0.8);
+}
+
+.letter {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 98%;
+    max-width: 750px;
+    height: 120px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    transition: height 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+                transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+                opacity 0.3s ease;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.letter.revealed {
+    opacity: 1;
+    height: 580px;
+    transform: translate(-50%, -35%);
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.letter-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 25px 30px;
+    text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Scrollbar personalizado */
+.letter-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.letter-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.letter-content::-webkit-scrollbar-thumb {
+    background: #e74c3c;
+    border-radius: 3px;
+}
+
+.letter-content::-webkit-scrollbar-thumb:hover {
+    background: #c0392b;
+}
+
+.letter-content .heart {
+    font-size: 50px;
+    margin-bottom: 15px;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.letter-text {
+    width: 100%;
+}
+
+.letter-text p {
+    color: #2c3e50;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    text-align: left;
+    font-family: 'Georgia', serif;
+}
+
+.letter-text p:first-child {
+    margin-top: 0;
+}
+
+.letter-text p:last-child {
+    margin-bottom: 0;
+}
+
+.letter-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+}
+
+.letter-footer p {
+    color: #2c3e50;
+    font-size: 14px;
+    margin: 5px 0;
+    text-align: left;
+    font-family: 'Georgia', serif;
+}
+
+.letter-footer .from {
+    font-weight: 600;
+}
+
+.letter-footer .to {
+    font-weight: 600;
+}
+
+.letter-footer span {
+    font-weight: normal;
+    color: #e74c3c;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    margin-top: 200px;
+    z-index: 5;
+    position: relative;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: 2px solid #2c5f8d;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+}
+
+.btn-primary {
+    background: #2c5f8d;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: #1a4a6b;
+    border-color: #1a4a6b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 95, 141, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary.inactive {
+    background: #ffffff;
+    color: #2c5f8d;
+}
+
+.btn-primary.inactive:hover {
+    background: #f0f0f0;
+    border-color: #2c5f8d;
+}
+
+.btn-secondary {
+    background: #ffffff;
+    color: #2c5f8d;
+}
+
+.btn-secondary:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 95, 141, 0.2);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Corazones flotantes */
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 30px;
+    opacity: 0;
+    animation: floatUp 3s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) scale(0.5) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) translateX(var(--random-x)) scale(1.2) rotate(360deg);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+    
+    .container {
+        gap: 30px;
+        padding: 80px 10px 40px 10px;
+        min-height: 100vh;
+        justify-content: center;
+    }
+    
+    .envelope-wrapper {
+        width: 90vw;
+        max-width: 420px;
+        height: 295px;
+    }
+    
+    .letter {
+        width: 98vw;
+        max-width: 550px;
+        height: 100px;
+    }
+    
+    .letter.revealed {
+        height: 520px;
+        transform: translate(-50%, -35%);
+    }
+    
+    .letter-content {
+        padding: 20px;
+    }
+    
+    .letter-content .heart {
+        font-size: 40px;
+        margin-bottom: 12px;
+    }
+    
+    .letter-text p {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 12px;
+    }
+    
+    .lock-heart {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .lock-heart::before,
+    .lock-heart::after {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .lock-heart::before {
+        top: -25px;
+    }
+    
+    .lock-heart::after {
+        left: 25px;
+    }
+    
+    .controls {
+        gap: 15px;
+        margin-top: 180px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .btn {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .envelope-wrapper {
+        width: 88vw;
+        height: 260px;
+    }
+    
+    .letter {
+        max-width: 98vw;
+        height: 95px;
+    }
+    
+    .letter.revealed {
+        height: 480px;
+        transform: translate(-50%, -35%);
+    }
+    
+    .letter-content {
+        padding: 18px;
+    }
+    
+    .letter-text p {
+        font-size: 13px;
+    }
+    
+    .letter-footer p {
+        font-size: 13px;
+    }
+}
