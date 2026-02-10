@@ -87,7 +87,7 @@ function loadFromSheet() {
 
         const today = todayISO();
 
-        for (let i = 1; i < rows; i++) {
+        for (let i = 0; i < rows; i++) {
             const rawDate = data.getValue(i, 0);
             const date = formatDateFromSheet(rawDate);
 
@@ -116,7 +116,7 @@ function chooseMessage() {
         ? todayMessage
         : randomMessages[Math.floor(Math.random() * randomMessages.length)];
 
-    elements.letterText.innerHTML = `<p>${message}</p>`;
+    elements.letterText.innerHTML = `<p class="message">${message}</p>`;
 }
 
 // =====================
