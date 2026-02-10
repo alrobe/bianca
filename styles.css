@@ -71,41 +71,49 @@ body {
     transform: rotateX(-180deg);
 }
 
+/* =========================
+   CANDADO (antes corazón)
+   ========================= */
 .lock-heart {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 70px;
-    height: 70px;
-    background: #e74c3c;
-    transform: translate(-50%, -50%) rotate(-45deg);
-    z-index: 0;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    width: 52px;
+    height: 42px;
+    background: #f1c40f;
+    border-radius: 6px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
     transition: opacity 0.8s ease, transform 0.8s ease;
     pointer-events: none;
 }
 
-/* Lóbulo izquierdo */
-.lock-heart::before,
+/* Arco del candado */
+.lock-heart::before {
+    content: "";
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    width: 30px;
+    height: 26px;
+    border: 5px solid #f1c40f;
+    border-bottom: none;
+    border-radius: 18px 18px 0 0;
+    transform: translateX(-50%);
+}
+
+/* Agujero del candado */
 .lock-heart::after {
     content: "";
     position: absolute;
-    width: 70px;
-    height: 70px;
-    background: #e74c3c;
+    top: 16px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #2c3e50;
     border-radius: 50%;
-}
-
-/* Izquierdo */
-.lock-heart::before {
-    top: -35px;
-    left: 0;
-}
-
-/* Derecho */
-.lock-heart::after {
-    left: 35px;
-    top: 0;
+    transform: translateX(-50%);
 }
 
 .envelope-flap.open ~ .lock-heart {

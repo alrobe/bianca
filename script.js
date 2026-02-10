@@ -72,7 +72,7 @@ function loadFromSheet() {
     query.send(response => {
         if (response.isError()) {
             console.error(response.getMessage());
-            elements.letterText.innerHTML = `<p>Error cargando el mensaje 💔</p>`;
+            elements.letterText.innerHTML = `<p>Error cargando el mensaje 😢</p>`;
             return;
         }
 
@@ -128,7 +128,7 @@ function createFloatingHearts() {
     for (let i = 0; i < 50; i++) {
         const heart = document.createElement('div');
         heart.className = 'floating-heart';
-        heart.textContent = '❤️';
+        heart.textContent = '✨';
         heart.style.left = `${30 + Math.random() * 40}%`;
         heart.style.top = `${40 + Math.random() * 20}%`;
         heart.style.fontSize = `${20 + Math.random() * 15}px`;
@@ -145,10 +145,10 @@ function createFloatingHearts() {
 function openEnvelope() {
     if (isOpen) return;
 
-    const input = prompt('Ingresa la contraseña 💌');
+    const input = prompt('Ingresa la contraseña 😉');
 
     if (input !== PASSWORD) {
-        alert('Ups… solo Bianca puede abrir este mensaje 💖');
+        alert('Solo Bianca puede abrir este mensaje!!! 😠');
         return;
     }
 
