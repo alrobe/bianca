@@ -83,7 +83,7 @@ body {
     background: #f1c40f;
     border-radius: 6px;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 4;
     filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
     transition: opacity 0.8s ease, transform 0.8s ease;
     pointer-events: none;
@@ -297,21 +297,6 @@ body {
     color: #2c5f8d;
 }
 
-.btn-secondary:hover {
-    background: #f0f0f0;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(44, 95, 141, 0.2);
-}
-
-.btn-secondary:active {
-    transform: translateY(0);
-}
-
-.btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
 /* Corazones flotantes */
 .floating-hearts {
     position: fixed;
@@ -346,27 +331,15 @@ body {
     }
 }
 
-/* Responsive design */
+/* =========================
+   RESPONSIVE
+   ========================= */
 @media (max-width: 600px) {
-    body {
-        overflow-y: auto;
-        overflow-x: hidden;
-        align-items: flex-start;
-        padding: 20px 0;
-    }
-    
-    .container {
-        gap: 30px;
-        padding: 80px 10px 40px 10px;
-        min-height: 100vh;
-        justify-content: center;
-    }
-    
     .envelope-wrapper {
         width: 90vw;
-        max-width: 420px;
         height: 295px;
     }
+    
     
     .letter {
         width: 98vw;
@@ -394,45 +367,68 @@ body {
         margin-bottom: 12px;
     }
     
-    .lock-heart {
-        width: 50px;
-        height: 50px;
+
+    .letter {
+        width: 98vw;
+        max-width: 550px;
+        height: 100px;
     }
     
-    .lock-heart::before,
-    .lock-heart::after {
-        width: 50px;
-        height: 50px;
+    .letter.revealed {
+        height: 520px;
+        transform: translate(-50%, -35%);
     }
     
-    .lock-heart::before {
-        top: -25px;
+    .letter-content {
+        padding: 20px;
     }
     
-    .lock-heart::after {
-        left: 25px;
+    .letter-content .heart {
+        font-size: 40px;
+        margin-bottom: 12px;
     }
     
-    .controls {
-        gap: 15px;
-        margin-top: 180px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .btn {
-        padding: 12px 30px;
+    .letter-text p {
         font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 12px;
+    }
+    
+    .lock-heart {
+        width: 44px;
+        height: 36px;
+    }
+
+    .lock-heart::before {
+        width: 26px;
+        height: 22px;
+        top: -22px;
+        border-width: 4px;
+    }
+
+    .lock-heart::after {
+        width: 6px;
+        height: 6px;
+    }
+
+    .letter.revealed {
+        height: 520px;
     }
 }
 
-/* Para pantallas muy pequeñas */
 @media (max-width: 400px) {
     .envelope-wrapper {
         width: 88vw;
         height: 260px;
     }
     
+    
+    .letter {
+        max-width: 98vw;
+        height: 95px;
+    }
+    
+
     .letter {
         max-width: 98vw;
         height: 95px;
@@ -440,18 +436,5 @@ body {
     
     .letter.revealed {
         height: 480px;
-        transform: translate(-50%, -35%);
-    }
-    
-    .letter-content {
-        padding: 18px;
-    }
-    
-    .letter-text p {
-        font-size: 13px;
-    }
-    
-    .letter-footer p {
-        font-size: 13px;
     }
 }
