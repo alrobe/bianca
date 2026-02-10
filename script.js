@@ -93,7 +93,7 @@ function loadFromSheet() {
 
             const msgB = data.getValue(i, 1);
             const msgC = data.getValue(i, 2);
-            console.log(`Row ${i}: Date=${date}, MsgB=${msgB}, MsgC=${msgC}, Today=${today}`);
+
             if (date === today && msgB) {
                 todayMessage = msgB;
             }
